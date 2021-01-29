@@ -9,6 +9,7 @@ class Stone{
         this.image = loadImage("images/stone.png")
         this.body = Matter.Bodies.circle(x,y,diameter,options);
         this.diameter = diameter;
+        World.add(world, this.body);
     }
     display(){
         var pos = this.body.position;

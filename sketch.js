@@ -9,6 +9,7 @@ var treeObj, stoneObj,groundObject, launcherObject;
 var mango1,mango2,mango3,mango4,mango5;
 var world,boy;
 var constraint;
+var mangoBodyPosition, stoneBodyPosition;
 
 function preload(){
 	boy=loadImage("images/boy.png");
@@ -50,21 +51,30 @@ function draw() {
 
   groundObject.display();
   
-  dectectcollision(stoneObj,mango1);
-  dectectcollision(stoneObj,mango2);
-  dectectcollision(stoneObj,mango3);
-  dectectcollision(stoneObj,mango4);
+  detectcollision(stoneObj,mango1);
+  detectcollision(stoneObj,mango2);
+  detectcollision(stoneObj,mango3);
+  detectcollision(stoneObj,mango4);
 }
 function mouseDragged(){
     Matter.Body.setPosition(stoneObj.body,{x: mouseX , y: mouseY});
 }
 
-
 function mouseReleased(){
 	constraint.fly();
 }
-function dectectcollision(bodyA,bodyB){
-	if(bodyA.body.position==bodyB.body.position){
-		Matter.Body.setStatic(bodyB.body,false)
-	}
+
+function keyPressed(){
+  if(keyCode===32){
+    Matter.Body.setPosition(stoneObj.body,{x:240,y:420});
+    constraint.attach(stoneObj.body);
+  }
+}
+function detectcollision(lstone,lmango){
+  mangoBodyPosition=lmango.body.position
+  stoneBodyPosition=lstone.body.position
+  var distance=dist(stoneBodyPosition.x,stoneBodyPosition.y, mangoBodyPosition.x, mangoBodyPosition.y)
+  if (distance<=lmango.r+lstone.r){
+    Matter.Body.setStatic(lmango.body, false);
+  }
 }

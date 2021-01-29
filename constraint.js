@@ -22,4 +22,7 @@ class Line{
     fly(){
         this.constraint.bodyA=null;
     }
+    attach(bodyA){
+        this.constraint.bodyA=bodyA;
+    }
 }
