@@ -71,10 +71,14 @@ function keyPressed(){
   }
 }
 function detectcollision(lstone,lmango){
-  mangoBodyPosition=lmango.body.position
-  stoneBodyPosition=lstone.body.position
+  mangoBodyPosition=lmango.body.position;
+  stoneBodyPosition=lstone.body.position;
   var distance=dist(stoneBodyPosition.x,stoneBodyPosition.y, mangoBodyPosition.x, mangoBodyPosition.y)
-  if (distance<=lmango.r+lstone.r){
+  console.log(distance);
+  console.log(lmango.r+lstone.diameter);
+  if (distance<=lmango.r+lstone.diameter){
+    
     Matter.Body.setStatic(lmango.body, false);
   }
+  
 }
